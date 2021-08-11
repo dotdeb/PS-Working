@@ -38,9 +38,9 @@ function venv {
     }
 }
 #
-# Common work tools I need to run once
+# Common work tools I need
 #
-function Init {
+function Get-Tools {
     if (-not (which teams)) {
         Write-Host 'No teams installed. Download .deb)' -ForegroundColor Green
         curl https://packages.microsoft.com/repos/ms-teams/pool/main/t/teams/teams_1.4.00.7556_amd64.deb -o ~/Downloads/teams.deb
@@ -50,6 +50,10 @@ function Init {
     if (-not (which az)) {
         Write-Host 'No az-cli installed. Run install script)' -ForegroundColor Green
         curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+    }
+    if (-not (which dotnet)) {
+        Write-Host 'No dotnet installed. Install from apt (teams install should have added apt)' -ForegroundColor Green
+        sudo apt install -y dotnet-sdk-5.0
     }
 }
 
