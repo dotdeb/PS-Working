@@ -18,8 +18,12 @@ function edge {
     microsoft-edge-beta &> /dev/null &
 }
 function ls ($loc = '.') {
+    if (-not (which lp)) {
+        Write-Host "This command is overriden. I need sudo permission to make this work"
+        sudo cp /usr/bin/ls /usr/bin/lp
+    }
     $env:LS_COLORS = 'di=01;35:fi=00;96:*.ps1=00;94:*.py=00;33'
-    ll $loc -X --color
+    lp $loc -X --color
 }
 function venv {
     if (Test-Path .venv) {
@@ -31,3 +35,4 @@ function venv {
 
 # Set starting point to home
 Set-Location
+
